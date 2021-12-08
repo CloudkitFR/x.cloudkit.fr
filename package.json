@@ -1,0 +1,24 @@
+{
+  "name": "x.cloudkit.fr",
+  "version": "1.0.0",
+  "description": "Server Console Website",
+  "main": "index.ts",
+  "scripts": {
+    "start:web": "yarn --cwd packages/nextjs dev",
+    "start:express": "yarn --cwd packages/express start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CloudkitFR/x.cloudkit.fr.git"
+  },
+  "author": "CloudKit FR",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CloudkitFR/x.cloudkit.fr/issues"
+  },
+  "homepage": "https://github.com/CloudkitFR/x.cloudkit.fr#readme",
+  "dependencies": {
+    "node-pty": "^0.10.1",
+    "xterm": "^4.15.0"
+  }
+}

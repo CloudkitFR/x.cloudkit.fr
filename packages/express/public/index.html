@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/xterm.css">
+        <link rel="stylesheet" href="css/style.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xterm/3.14.5/xterm.min.js"></script>
+        <title>Xterm</title>
+        <script>
+            window.onload = () => {
+                function changeSize(classname) {
+                    let elem = document.getElementsByClassName(classname)[0];
+                    console.log(elem.style)
+                    elem.style.width = "100%";
+                    elem.style.height = "100vh";
+                }
+    
+                var term = new Terminal();
+                
+                let ws = new WebSocket("ws://localhost:8081")
+                
+                term.open(document.getElementById("terminal"));
+                // term.write("\x1B[1;3;31mCloudKit\x1B[0m $ ");
+                term.onData( (e) => {
+                    ws.send(e)
+                })
+                ws.onmessage = ((e) => {
+                    term.write(e.data)
+                });
+                changeSize("xterm-screen");
+                changeSize("xterm-text-layer");
+                changeSize("xterm-selection-layer");
+                changeSize("xterm-link-layer");
+                changeSize("xterm-cursor-layer");
+            }
+        </script>
+    </head>
+    <body>
+        <div id="terminal">
+
+        </div>
+    </body>
+</html>

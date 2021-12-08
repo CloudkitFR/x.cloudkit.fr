@@ -1,0 +1,25 @@
+version: "3.3"
+services:
+  web-server:
+    container_name: web-server
+    build:
+      context: "./packages/nextjs"
+      dockerfile: Dockerfile
+    image: nodejs
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./packages/nextjs/:/home/nextjs'
+      - './packages/nextjs/node_modules/:/home/node/nextjs/node_modules'
+    ports:
+      - 8080:3000
+    networks:
+      - app-network
+
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  node_modules:
