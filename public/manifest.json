@@ -1,0 +1,17 @@
+{
+    "name": "C L O U D K I T",
+    "description": "Connectez-vous à votre environnement Cloudkit pour utiliser vos applications favorites.",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#000000",
+    "theme_color": "#000000",
+    "start_url": "/",
+    "scope": "/",
+    "icons": [
+        {
+            "src": "/assets/img/icon.png",
+            "type": "image/png",
+            "sizes": "800x800"
+        }
+    ]
+}

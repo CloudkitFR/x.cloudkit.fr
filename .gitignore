@@ -1,0 +1,17 @@
+# Ignore files
+*
+
+# Except static and sources files
+!/public/
+!/public/**
+!/src/
+!/src/**
+
+# Except NodeJS files
+!package.json
+!rollup.config.js
+
+# Except Git files
+!.gitignore
+!LICENSE
+!README.md
