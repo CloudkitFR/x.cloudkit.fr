@@ -1,5 +1,5 @@
 import '../styles/globals.css'
-import "xterm/css/xterm.css"
+import "../node_modules/xterm/css/xterm.css"
 import type { AppProps } from 'next/app'
 
 function MyApp({ Component, pageProps }: AppProps) {
