@@ -15,24 +15,40 @@ export default {
     },
 
     mounted() {
-        const terminal  = document.getElementById("terminal").firstElementChild;
+        const node      = document.getElementById("terminal").firstElementChild;
+        const ws        = new WebSocket(`ws://${location.host}`);
         const term      = new Terminal({
             convertEol          : true,
             allowTransparency   : true,
-            rendererType        : "dom",
+            rendererType        : "canvas",
             fontFamily          : "Jetbrains Mono, monospace"
         });
 
-        term.open(terminal);
-        term.write("\x1B[38;5;3mKARDOS$ \x1B[0mYo les mecs");
-        fit.fit(term);
+        ws.onopen = function () {
+            window.onresize = function () {
+                fit.fit(term);
+            };
 
-        window.onresize = function () {
+            term.on("resize", function (data) {
+                ws.send("\u0000" + JSON.stringify(data));
+            });
+
+            term.on("data", function (data) {
+                ws.send(data);
+            });
+
+            term.open(node);
             fit.fit(term);
         };
 
-        term.on("data", function (data) {
+        ws.onmessage = function ({ data }) {
             term.write(data);
-        });
+        };
+
+        this.ws = ws;
+    },
+
+    unmounted() {
+        this.ws?.close();
     }
 }
