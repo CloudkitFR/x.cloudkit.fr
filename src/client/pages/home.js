@@ -1,7 +1,3 @@
-import Loading          from "../components/loading";
-import Environments     from "../components/environments";
-import Terminal         from "../components/terminal";
-
 
 //////////////////////////////////////////////////
 //  HOME
@@ -10,29 +6,33 @@ import Terminal         from "../components/terminal";
 
 export default {
 
-    data() {
-        return {
-            state: 0
-        };
-    },
-
     render() {
         return (
-            <>
-                <Loading style={{
-                    opacity         : this.state ? 0            :  1,
-                    transform       : this.state ? "scale(1.1)" : "",
-                    pointerEvents   : this.state ? "none"       : "",
-                }} />
-                <Environments />
-            </>
-        );
-    },
+            <div id="content">
+                <div class="content-title">HEY</div>
+                <div class="content-subtitle">Alors, que faisons-nous aujourd'hui ?</div>
 
-    created() {
-        window.onclick      = () => {
-            window.onclick  = null;
-            this.state      = 1;
-        };
+                <div class="buttons-env">
+                    <router-link to="/e/add">
+                        <img src="/assets/icons/add.png" />
+                        <div>Créer</div>
+                    </router-link>
+
+                    <router-link to="/e/travail">
+                        <img src="/assets/icons/teamwork.jpg" />
+                        <div>Travail</div>
+                    </router-link>
+
+                    <router-link to="/e/jeux">
+                        <img src="/assets/icons/invader.png" />
+                        <div>Jeux</div>
+                    </router-link>
+                </div>
+
+                <div id="credits">
+                    BETA 1.0.0
+                </div>
+            </div>
+        );
     }
 }

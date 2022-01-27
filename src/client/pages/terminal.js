@@ -1,8 +1,9 @@
-import Loading from "../components/loading";
+import Loading  from "../components/loading";
+import Terminal from "../components/terminal";
 
 
 //////////////////////////////////////////////////
-//  APP
+//  TERMINAL
 //////////////////////////////////////////////////
 
 
@@ -14,6 +15,16 @@ export default {
         };
     },
 
+    methods: {
+        onReady() {
+            this.state = 1;
+        },
+
+        onClose() {
+            this.$router.replace(`/e/${this.$route.params.env}`);
+        }
+    },
+
     render() {
         return (
             <>
@@ -23,15 +34,8 @@ export default {
                     pointerEvents   : this.state ? "none"       : "",
                 }} />
 
-                <router-view />
+                <Terminal onready={this.onReady} onclose={this.onClose} />
             </>
         );
-    },
-
-    created() {
-        window.onclick      = () => {
-            window.onclick  = null;
-            this.state      = 1;
-        };
     }
 }

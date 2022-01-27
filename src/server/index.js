@@ -35,6 +35,10 @@ app.ws("/", function (ws, req) {
         ws.send(data);
     });
 
+    proc.onExit(function () {
+        ws.close();
+    });
+
     ws.on("message", function (message) {
         if (message[0] == "\u0000" && message.length > 3) {
             let { cols, rows } = JSON.parse(message.substring(1));

@@ -13,7 +13,7 @@ body {
 body::after {
     content: "";
     pointer-events: none;
-    background: linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.50) 50%);
+    /* background: linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.50) 50%); */
     background-size: 100% 2px;
     position: fixed;
     z-index: 9999;

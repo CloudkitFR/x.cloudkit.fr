@@ -6,6 +6,8 @@
 
 export default {
 
+    props: [ "onready", "onclose" ],
+
     render() {
         return (
             <div id="terminal" ref="terminal">
@@ -15,6 +17,7 @@ export default {
     },
 
     mounted() {
+        const self      = this;
         const node      = document.getElementById("terminal").firstElementChild;
         const ws        = new WebSocket(`ws://${location.host}`);
         const term      = new Terminal({
@@ -38,7 +41,31 @@ export default {
             });
 
             term.open(node);
+            term.write(`
+  /$$$$$$  /$$        /$$$$$$  /$$   /$$ /$$$$$$$  /$$   /$$ /$$$$$$ /$$$$$$$$
+ /$$__  $$| $$       /$$__  $$| $$  | $$| $$__  $$| $$  /$$/|_  $$_/|__  $$__/
+| $$  \\__/| $$      | $$  \\ $$| $$  | $$| $$  \\ $$| $$ /$$/   | $$     | $$   
+| $$      | $$      | $$  | $$| $$  | $$| $$  | $$| $$$$$/    | $$     | $$   
+| $$      | $$      | $$  | $$| $$  | $$| $$  | $$| $$  $$    | $$     | $$   
+| $$    $$| $$      | $$  | $$| $$  | $$| $$  | $$| $$\\  $$   | $$     | $$   
+|  $$$$$$/| $$$$$$$$|  $$$$$$/|  $$$$$$/| $$$$$$$/| $$ \\  $$ /$$$$$$   | $$   
+ \\______/ |________/ \\______/  \\______/ |_______/ |__/  \\__/|______/   |__/   
+                                                                              
+                                                                              
+Welcome, LXGIC !
+Your system is running on Cloudkit OS (build 1002).
+                                                                              
+                                                                              
+`);
             fit.fit(term);
+
+            // Call ready handler.
+            self.$props.onready();
+        };
+
+        // Call close handler.
+        ws.onclose = function () {
+            self.$props.onclose();
         };
 
         ws.onmessage = function ({ data }) {
